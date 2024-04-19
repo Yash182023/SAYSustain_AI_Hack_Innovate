@@ -24,8 +24,17 @@ Our SOS emergency response system enables individuals to report environmental em
 Our sustainability chatbot serves as a virtual assistant, providing helpful answers to basic queries related to sustainability. Whether you're looking for recycling tips or information about eco-friendly products, our chatbot is here to assist you.
 
 ## Getting Started
-*For getting started you need to fork the repository by clicking fork button*
-After forking it you need to open terminal in your **VS Code** and then type:
+*For getting started you need to fork the repository by clicking fork button*.  
+``git clone https://github.com/<your_github_username>/SAYSustain_AI_Hack_Innovate.git``.
+
+
+*Then navigate to the desired directory by using this command.*  
+``cd SAYSustain_AI_Hack_Innovate``.
+
+*Then open the Code editor by using command*.  
+``code .``
+
+
 
 
 
