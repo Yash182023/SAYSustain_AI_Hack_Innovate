@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption Prediction</title>
+</head>
+<body>
+    <h2>Energy Consumption Prediction</h2>
+    <form id="prediction-form">
+        <label for="Weather_Temperature">Weather Temperature:</label><br>
+        <input type="number" id="Weather_Temperature" name="Weather_Temperature" value="25"><br>
+
+        <label for="Weather_Humidity">Weather Humidity:</label><br>
+        <input type="number" id="Weather_Humidity" name="Weather_Humidity" value="60"><br>
+
+        <label for="Weather_Precipitation">Weather Precipitation:</label><br>
+        <input type="number" id="Weather_Precipitation" name="Weather_Precipitation" value="0"><br>
+
+        <label for="Weather_Wind_Speed">Weather Wind Speed:</label><br>
+        <input type="number" id="Weather_Wind_Speed" name="Weather_Wind_Speed" value="10"><br>
+
+        <label for="Weather_Solar_Radiation">Weather Solar Radiation:</label><br>
+        <input type="number" id="Weather_Solar_Radiation" name="Weather_Solar_Radiation" value="200"><br>
+
+        <label for="Building_Size">Building Size:</label><br>
+        <input type="number" id="Building_Size" name="Building_Size" value="800"><br>
+
+        <label for="Building_Age">Building Age:</label><br>
+        <input type="number" id="Building_Age" name="Building_Age" value="10"><br>
+
+        <label for="Occupancy_Count">Occupancy Count:</label><br>
+        <input type="number" id="Occupancy_Count" name="Occupancy_Count" value="200"><br>
+
+        <label for="Equipment_Usage_HVAC">Equipment Usage HVAC:</label><br>
+        <input type="number" id="Equipment_Usage_HVAC" name="Equipment_Usage_HVAC" value="300"><br>
+
+        <label for="Equipment_Usage_Lighting">Equipment Usage Lighting:</label><br>
+        <input type="number" id="Equipment_Usage_Lighting" name="Equipment_Usage_Lighting" value="400"><br>
+
+        <label for="Equipment_Usage_Machinery">Equipment Usage Machinery:</label><br>
+        <input type="number" id="Equipment_Usage_Machinery" name="Equipment_Usage_Machinery" value="50"><br>
+
+        <label for="Electricity_Price">Electricity Price:</label><br>
+        <input type="number" id="Electricity_Price" name="Electricity_Price" value="0.15"><br>
+
+        <label for="Gas_Price">Gas Price:</label><br>
+        <input type="number" id="Gas_Price" name="Gas_Price" value="0.1"><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <h2>Results:</h2>
+    <div id="results"></div>
+
+    <script>
+        const form = document.getElementById('prediction-form');
+        const resultsDiv = document.getElementById('results');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            const response = await fetch('/predict/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            const data = await response.json();
+
+            resultsDiv.innerHTML = `
+                <p>Random Forest Prediction: ${data.Random_Forest_Prediction}</p>
+                <p>Support Vector Prediction: ${data.Support_Vector_Prediction}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
